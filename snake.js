@@ -1,11 +1,29 @@
 const canvas = document.getElementById("snake");
 const context = canvas.getContext("2d");
 
+// Select the level
+const select = document.getElementById("dificult");
+const level = select[select.selectedIndex].value;
+
+
+function reset() {
+    snake = [];
+    snake[0] = {
+        x: 9 * box,
+        y: 10 * box,
+    };
+    randomFood();
+    score = 0;
+    d = null;
+
+    gameRuning = setInterval(draw, speed * 50);
+}
+
 
 // Create the unit
 
 const box = 32;
-const speed = 3; // 1 = super hard // 2 = hard // 3 = easy // 4 = super easy
+const speed = level; // 1 = super hard // 2 = hard // 3 = easy // 4 = super easy
 
 // Load the images
 
@@ -95,11 +113,11 @@ function draw() {
 
     // draw the snake
     for (let i = 0; i < snake.length; i++){
-        context.fillStyle = (i === 0) ? "green" : "white";
+        context.fillStyle = (i === 0) ? "#4F76F9" : "#4F76F9";
         context.fillRect(snake[i].x,snake[i].y, box, box);
 
-        context.strokeStyle = "red";
-        context.strokeRect(snake[i].x,snake[i].y, box, box);
+        //context.strokeStyle = "black";
+        //context.strokeRect(snake[i].x,snake[i].y, box, box);
 
     }
 
@@ -158,5 +176,5 @@ function draw() {
 
 }
 
-let gameRuning =setInterval(draw, speed * 50);
+let gameRuning = setInterval(draw, speed * 50);
 
